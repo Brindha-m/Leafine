@@ -1,18 +1,34 @@
+import gc
+import glob
+import os
+import time
+from datetime import datetime
+
+import cv2
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 import streamlit as st
 import torch
-import detect
-from PIL import Image
-from io import *
-import glob
-from datetime import datetime
-import os
-import wget
-import time
-from streamlit_card import card
 from annotated_text import annotated_text
-import cv2
-from grad_cam import SaveFeatures, getCAM, plotGradCAM
+from PIL import Image
+from streamlit_card import card
+from streamlit_player import st_player
+from torch.utils.data import DataLoader, Dataset
 
+import detect
+from dataset import CassavaDataset, classes, get_transforms
+from grad_cam import SaveFeatures, getCAM, plotGradCAM
+from html_mardown import (app_off, app_off2, class0, class0_side, class1,
+                          class1_side, class2, class2_side, class3,
+                          class3_side, class4, class4_side,
+                          image_uploaded_success, loading_bar,
+                          model_predicting, more_options, result_pred,
+                          s_load_bar, unknown, unknown_msg, unknown_side,
+                          unknown_w)
+from inference import inference, load_state
+from models import resnext50_32x4d
+from utilsgrad import CFG
 
 
 def get_accuracy_str(raw_list): # display detection result as string 
@@ -60,10 +76,17 @@ def get_accuracy_str(raw_list): # display detection result as string
                 recommend = "🌱 If a plant displays signs of a disease, remove all the infected parts and destroy them by burning.\n 🌱 Replace the soil in the flowerpot.\n 🌱 Use only settled room-temperature water forwatering.\n 🌱 Adjust the air conditions. If houseplants are infected,keep them spaced."
                 treatment = "- After harvesting the crop To destroy the plant debris that used to be diseased by tilling. And crop rotation. \n - Spraying fungicides such as triadimefon, myclobutanil. (myclobutanil) propiconazole (propiconazole) azocystrobin (azoxystrobin)"
                 st.image("./replant/Powdery1.png")
+                st.markdown("***")
+
                 st.image("./replant/PowderyPM.png")
                 st.image("./replant/PowderyI.png")
+                st.markdown("***")
+
                 st.image("./replant/PowderyHM.png")
+                st.markdown("***")
+
                 st.image("./replant/ProductRecom1.png")
+
 
                 col1, col2 = st.columns(2)
                 col3, col4 = st.columns(2)
@@ -99,6 +122,18 @@ def get_accuracy_str(raw_list): # display detection result as string
             image="https://badikheti-production.s3.ap-south-1.amazonaws.com/products/202301281242101383789267.jpg",
             url="https://www.badikheti.com/organic-pesticide/pdp/leemark-prevent-powdery-mildew-black-spot-downy-mildew-blights-molds-and-other-plant-diseases/269unrka"
         )
+                st.markdown("***")
+                st.image("./replant/Careguideyoutube.png")
+
+                youtubec1, youtubec2 = st.columns([1, 1])
+                with youtubec1:
+                # Embed a youtube video
+                    st_player("https://youtu.be/Kzm6jxeU1kg")
+
+                with youtubec2:
+                # Embed a music from SoundCloud
+                    st_player("https://youtu.be/xEqiNh0upMk")
+
              
                 ######## LEAF SPOT ###################
                 
@@ -110,10 +145,18 @@ def get_accuracy_str(raw_list): # display detection result as string
                 treatment = "- Spray with anti-fungal agents such as prochloraz, mancozeb, diphenoconazole. (difenoconazole), etc."
                 
                 st.image("./replant/Spot1.png")
+                st.markdown("***")
+
                 st.image("./replant/SpotPM.png")
                 st.image("./replant/SpotI.png")
+                st.markdown("***")
+
                 st.image("./replant/SpotCause.png")
+                st.markdown("***")
+
                 st.image("./replant/ProductRecom1.png")
+               
+
 
                 col1, col2 = st.columns(2)
                 col3, col4 = st.columns(2)
@@ -149,6 +192,19 @@ def get_accuracy_str(raw_list): # display detection result as string
             image="https://m.media-amazon.com/images/I/71JcFuVYRFL._SX522_.jpg",
             url="https://www.amazon.in/19-Fertilizer-Garden-Plants-0-25/dp/B0B1MZV3DS/ref=asc_df_B0B1MZV3DS/?tag=googleshopdes-21&linkCode=df0&hvadid=586198977745&hvpos=&hvnetw=g&hvrand=10187752443105046934&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1007810&hvtargid=pla-1722813852198&th=1"
         )
+                st.markdown("***")
+                
+                st.image("./replant/Careguideyoutube.png") 
+                yt1, yt2 = st.columns([1, 1])
+                with yt1:
+                # Embed a youtube video
+                    st_player("https://youtu.be/dnNJwQ86c4w")
+
+                with yt2:
+                # Embed a music from SoundCloud
+                    st_player("https://youtu.be/NcnHd4xSMvk")
+
+             
                     
 
         
@@ -163,12 +219,20 @@ def get_accuracy_str(raw_list): # display detection result as string
                 treatment = "- Cut out the diseased branches, burn them. (If it is a large branch, it should be applied with red lime or copper compounds) and then sprayed with carbendashim. (carbendazim) 60% WP rate 10 grams per 20 liters of water or copper oxychloride 85% WP rate 50 grams per 20 liters of water throughout the interior and exterior."
               
                 st.image("./replant/Blight1.png")
+                st.markdown("***")
+
                 st.image("./replant/BlightPM.png")
                 st.image("./replant/BlightI.png")
-                st.image("./replant/BlightCause.png")
-                st.image("./replant/BlightHM.png")
-                st.image("./replant/ProductRecom1.png")
+                st.markdown("***")
 
+                st.image("./replant/BlightCause.png")
+                st.markdown("***")
+
+                st.image("./replant/BlightHM.png")
+                st.markdown("***")
+
+                st.image("./replant/ProductRecom1.png")
+            
                 col1, col2 = st.columns(2)
                 col3, col4 = st.columns(2)
 
@@ -202,7 +266,21 @@ def get_accuracy_str(raw_list): # display detection result as string
             text="It controls leaf yellowing, improves green leaves and prevent the Black spots",
             image="https://m.media-amazon.com/images/I/71JcFuVYRFL._SX522_.jpg",
             url="https://www.amazon.in/19-Fertilizer-Garden-Plants-0-25/dp/B0B1MZV3DS/ref=asc_df_B0B1MZV3DS/?tag=googleshopdes-21&linkCode=df0&hvadid=586198977745&hvpos=&hvnetw=g&hvrand=10187752443105046934&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1007810&hvtargid=pla-1722813852198&th=1"
+
         )
+                st.markdown("***")
+                st.image("./replant/Careguideyoutube.png")   
+                ytb1, ytb2 = st.columns([1, 1])
+                with ytb1:
+                # Embed a youtube video
+                    st_player("https://youtu.be/cGhzyhnKi5U")
+
+                with ytb2:
+                # Embed a music from SoundCloud
+                    st_player("https://youtu.be/eTA8VFeE-6Q")
+
+             
+                    
                     
 
            
@@ -215,9 +293,12 @@ def get_accuracy_str(raw_list): # display detection result as string
                 treatment = "- Soil fertilization: Mix NPK fertilizer with the highest N ratio and observe the amount of application according to the symptoms of the leaves. \n - Foliar fertilization: Use chemical fertilizers with high N values ​​or use urea. Swimming, high nitrogen formula Mix and get out of the water fertilizer."
                 st.image("./replant/N1.png")
                 st.image("./replant/NI.png")
-                st.image("./replant/NPM.png")
-                st.image("./replant/ProductRecom1.png")
+                st.markdown("***")
 
+                st.image("./replant/NPM.png")
+                st.markdown("***")
+
+                st.image("./replant/ProductRecom1.png")
                 col1, col2 = st.columns(2)
   
                 with col1:
@@ -236,6 +317,17 @@ def get_accuracy_str(raw_list): # display detection result as string
             image="http://www.aquanatureonline.com/wp-content/uploads/2021/08/FLORA-N.jpg",
             url="http://www.aquanatureonline.com/product/aquanature-flora-n-concentrated-nitrogen-supplement-for-planted-aquarium/?attribute_pa_size-upto=250ml"
         )
+                st.markdown("***")
+                    
+                st.image("./replant/Careguideyoutube.png")
+                ytn1, ytn2 = st.columns([1, 1])
+                with ytn1:
+                # Embed a youtube video
+                    st_player("https://youtu.be/dnNJwQ86c4w")
+
+                with ytn2:
+                # Embed a music from SoundCloud
+                    st_player("https://youtu.be/NcnHd4xSMvk")
              
                 
             # st.success(f'Chance is : "{label_name}" {each_label[1]} % ')
@@ -343,8 +435,184 @@ def main():
 
     
     elif choice == 'About (about)' :
-        st.image("./replant/N1.png")
-        # appgrad.main()
+
+        # Enable garbage collection
+        gc.enable()
+
+        # Hide warnings
+        st.set_option("deprecation.showfileUploaderEncoding", False)
+
+        # Set the directory path
+        my_path = "."
+
+        test = pd.read_csv(my_path + "/data/sample.csv")
+        output_image = my_path + "/images/gradcam2.png"
+
+        st.markdown("***")
+
+        # def run():
+        # # Set the box for the user to upload an image
+        st.write("**Upload your Image**")
+        uploaded_image = st.file_uploader(
+                "Upload your image in JPG or PNG format", type=["jpg", "png"]
+            )
+        #     return uploaded_image
+
+
+        # DataLoader for pytorch dataset
+        def Loader(img_path=None, uploaded_image=None, upload_state=False, demo_state=True):
+            test_dataset = CassavaDataset(
+                test,
+                img_path,
+                uploaded_image=uploaded_image,
+                transform=get_transforms(data="valid"),
+                uploaded_state=upload_state,
+                demo_state=demo_state,
+            )
+            test_loader = DataLoader(
+                test_dataset,
+                batch_size=CFG.batch_size,
+                shuffle=False,
+                num_workers=CFG.num_workers,
+                pin_memory=True,
+            )
+            return test_loader
+
+
+        # Function to deploy the model and print the report
+        def deploy(file_path=None, uploaded_image= uploaded_image, uploaded=False, demo=True):
+            # Load the model and the weights
+            device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            model = resnext50_32x4d(CFG.model_name, pretrained=False)
+            states = [load_state(my_path + "/weights/resnext50_32x4d_fold0_best.pth")]
+
+            # For Grad-cam features
+            final_conv = model.model.layer4[2]._modules.get("conv3")
+            fc_params = list(model.model._modules.get("fc").parameters())
+
+            # Display the uploaded/selected image
+            st.markdown("***")
+            st.markdown(model_predicting, unsafe_allow_html=True)
+            if demo:
+                test_loader = Loader(img_path=file_path)
+                image_1 = cv2.imread(file_path)
+            if uploaded:
+                test_loader = Loader(
+                    uploaded_image=uploaded_image, upload_state=True, demo_state=False
+                )
+                image_1 = file_path
+            st.sidebar.markdown(image_uploaded_success, unsafe_allow_html=True)
+            st.sidebar.image(image_1, width=301, channels="BGR")
+
+            for img in test_loader:
+                activated_features = SaveFeatures(final_conv)
+                # Save weight from fc
+                weight = np.squeeze(fc_params[0].cpu().data.numpy())
+
+                # Inference
+                logits, output = inference(model, states, img, device)
+                pred_idx = output.to("cpu").numpy().argmax(1)
+
+                # Grad-cam heatmap display
+                heatmap = getCAM(activated_features.features, weight, pred_idx)
+
+                ##Reverse the pytorch normalization
+                MEAN = torch.tensor([0.485, 0.456, 0.406])
+                STD = torch.tensor([0.229, 0.224, 0.225])
+                image = img[0] * STD[:, None, None] + MEAN[:, None, None]
+
+                # Display image + heatmap
+                plt.imshow(image.permute(1, 2, 0))
+                plt.imshow(
+                    cv2.resize(
+                        (heatmap * 255).astype("uint8"),
+                        (328, 328),
+                        interpolation=cv2.INTER_LINEAR,
+                    ),
+                    alpha=0.4,
+                    cmap="jet",
+                )
+                plt.savefig(output_image)
+
+                # Display Unknown class if the highest probability is lower than 0.5
+                if np.amax(logits) < 0.57:
+                    st.markdown(unknown, unsafe_allow_html=True)
+                    st.sidebar.markdown(unknown_side, unsafe_allow_html=True)
+                    st.sidebar.markdown(unknown_w, unsafe_allow_html=True)
+
+                # Display the class predicted if the highest probability is higher than 0.5
+                else:
+                    if pred_idx[0] == 0:
+                        st.markdown(class0, unsafe_allow_html=True)
+                        st.sidebar.markdown(class0_side, unsafe_allow_html=True)
+                        st.write(" The predicted class is: **Cassava Bacterial Blight (CBB)**")
+                    elif pred_idx[0] == 1:
+                        st.markdown(class1, unsafe_allow_html=True)
+                        st.sidebar.markdown(class1_side, unsafe_allow_html=True)
+                        st.write(
+                            "The predicted class is: **Cassava Brown Streak Disease (CBSD)**"
+                        )
+                    elif pred_idx[0] == 2:
+                        st.markdown(class2, unsafe_allow_html=True)
+                        st.sidebar.markdown(class2_side, unsafe_allow_html=True)
+                        st.write("The predicted class is: **Cassava Green Mottle (CGM)**")
+                    elif pred_idx[0] == 3:
+                        st.markdown(class3, unsafe_allow_html=True)
+                        st.sidebar.markdown(class3_side, unsafe_allow_html=True)
+                        st.write("The predicted class is: **Cassava Mosaic Disease (CMD)**")
+                    elif pred_idx[0] == 4:
+                        st.markdown(class4, unsafe_allow_html=True)
+                        st.sidebar.markdown(class4_side, unsafe_allow_html=True)
+                        st.write("The predicted class is: **Healthy**")
+
+                st.sidebar.markdown(
+                    "**Scroll down to read the full report (Grad-cam and class probabilities)**"
+                )
+
+                # Display the Grad-Cam image
+                st.title("**Grad-cam visualization**")
+                st.write(
+                    "Grad-cam *(Class Acvitation Map)* highlights the important regions in the image for predicting the class concept. It helps to understand if the model based its predictions on the correct regions of the image."
+                )
+                gram_im = cv2.imread(output_image)
+                st.image(gram_im, width=528, channels="RGB")
+
+                # Display the class probabilities table
+                st.title("**Class predictions:**")
+                if np.amax(logits) < 0.57:
+                    st.markdown(unknown_msg, unsafe_allow_html=True)
+                classes["class probability %"] = logits.reshape(-1).tolist()
+                classes["class probability %"] = classes["class probability %"] * 100
+                classes_proba = classes.style.background_gradient(cmap="Reds")
+                st.write(classes_proba)
+                del (
+                    model,
+                    states,
+                    fc_params,
+                    final_conv,
+                    test_loader,
+                    image_1,
+                    activated_features,
+                    weight,
+                    heatmap,
+                    gram_im,
+                    logits,
+                    output,
+                    pred_idx,
+                    classes_proba,
+                )
+                gc.collect()
+
+
+
+        # Deploy the model if the user uploads an image
+        if uploaded_image is not None:
+            # Close the demo
+            choice = "Select an Image"
+            # Deploy the model with the uploaded image
+            deploy(uploaded_image, uploaded=True, demo=False)
+            del uploaded_image
+
 
 if __name__ == '__main__':
     main()
