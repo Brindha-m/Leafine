@@ -1,5 +1,3 @@
-# Source: https://www.kaggle.com/yasufuminakama/panda-pytorch-grad-cam
-
 import matplotlib.pyplot as plt
 import torch.nn.functional as F
 import numpy as np
