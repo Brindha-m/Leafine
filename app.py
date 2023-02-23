@@ -1,5 +1,3 @@
-# modified from : https://github.com/thepbordin/Obstacle-Detection-for-Blind-people-Deployment/blob/main/app.py
-
 import streamlit as st
 import torch
 import detect
