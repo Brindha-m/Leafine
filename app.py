@@ -22,14 +22,11 @@ import cv2
 from utilsv8 import get_detection_folderv8, check_folders
 import redirect as rd
 # from ultralytics.yolo.engine.model import YOLO
-from utils.general import non_max_suppression
 from ultralytics import YOLO
 from ultralytics.yolo.engine.results import Results
 
-from pathlib import Path
 import streamlit as st
 from PIL import Image
-import subprocess
 import os
 
 ### ResNeXt imports #####
