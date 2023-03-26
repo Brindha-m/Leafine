@@ -30,7 +30,6 @@ from PIL import Image
 import os
 
 ### ResNeXt imports #####
-import detect
 from dataset import ResNetDataset, classes, get_transforms
 from grad_cam import SaveFeatures, getCAM, plotGradCAM
 from html_mardown import (class0, class1,
