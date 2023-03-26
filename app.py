@@ -612,7 +612,7 @@ def main():
             # Load the model and the weights
             device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
             model = resnext50_32x4d(CFG.model_name, pretrained=False)
-            states = [load_state(my_path + "models/resnext50_32x4d_fold0_best.pth")]
+            states = [load_state("models/resnext50_32x4d_fold0_best.pth")]
 
             # For Grad-cam features
             final_conv = model.model.layer4[2]._modules.get("conv3")
