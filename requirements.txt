@@ -1,4 +1,5 @@
 ultralytics
+notebook
 numpy
 opencv-python-headless
 ipython
