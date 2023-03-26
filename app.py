@@ -566,9 +566,9 @@ def main():
         st.set_option("deprecation.showfileUploaderEncoding", False)
 
         # Set the directory path
-        my_path = "."
+        #my_path = "."
 
-        test = pd.read_csv(my_path + "./data/sample.csv")
+        test = pd.read_csv("data/sample.csv")
         output_image = my_path + "/images/gradcam2.png"
         st.image("./replant/logoleafine.png")
         # Perceive the leaf ailment and sort out some way to treat them
