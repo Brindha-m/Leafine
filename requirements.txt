@@ -1,6 +1,6 @@
 ultralytics
 numpy
-opencv-python-headless==4.5.4.60
+opencv-python-headless
 altair==4.2.2
 attrs==22.2.0
 backports.zoneinfo==0.2.1
@@ -98,16 +98,12 @@ zipp==3.15.0
 # Base ------------------------------------------------------------------------
 gitpython>=3.1.30
 matplotlib>=3.2.2
-numpy>=1.18.5
-opencv-python>=4.1.1
 Pillow>=7.1.2
 psutil  # system resources
 PyYAML>=5.3.1
 requests>=2.23.0
 scipy>=1.4.1
 thop>=0.1.1  # FLOPs computation
-torch>=1.7.0  # see https://pytorch.org/get-started/locally (recommended)
-torchvision>=0.8.1
 tqdm>=4.64.0
 # protobuf<=3.20.1  # https://github.com/ultralytics/yolov5/issues/8012
 
