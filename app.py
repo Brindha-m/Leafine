@@ -448,7 +448,7 @@ def imageInput(device):
 
         # call Model prediction--
         
-        model = torch.hub.load('ultralytics/yolov5', 'custom', path='data/models/yleafinev5.pt', force_reload=True)
+        model = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yleafinev5.pt', force_reload=True)
         _ = model.cuda() if device == 'cuda' else model.cpu() # hide cuda_cnn display source : https://stackoverflow.com/questions/41149781/how-to-prevent-f-write-to-output-the-number-of-characters-written
         pred = model(imgpath)
         st.write(pred)
@@ -482,7 +482,7 @@ def imageInput(device):
         # YOLOV8 DETECTION RESULTS
         
         #with st.spinner("Detecting with 💕"):
-        model1 = YOLO(f'data/models/v8.pt')
+        model1 = YOLO(f'models/v8.pt')
         if image_file is not None:
             st.write("")
             st.sidebar.success("Successfully uploaded")
@@ -612,7 +612,7 @@ def main():
             # Load the model and the weights
             device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
             model = resnext50_32x4d(CFG.model_name, pretrained=False)
-            states = [load_state(my_path + "data/models/resnext50_32x4d_fold0_best.pth")]
+            states = [load_state(my_path + "models/resnext50_32x4d_fold0_best.pth")]
 
             # For Grad-cam features
             final_conv = model.model.layer4[2]._modules.get("conv3")
