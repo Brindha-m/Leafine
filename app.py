@@ -93,17 +93,14 @@ def result_to_json(result: Results, tracker=None):
                 result_list_json[idx]['class'],
             ) for idx in range(len_results)
         ]
-        tracks = tracker.update_tracks(bbs, frame=result.orig_img)
-        for idx in range(len(result_list_json)):
-            track_idx = next((i for i, track in enumerate(tracks) if track.det_conf is not None and np.isclose(track.det_conf, result_list_json[idx]['confidence'])), -1)
-            if track_idx != -1:
-                result_list_json[idx]['object_id'] = int(tracks[track_idx].track_id)
+        
     return result_list_json
 
 
 def view_result_default(result: Results, result_list_json, centers=None):
     ALPHA = 0.5
     image = result.orig_img
+    printed = False
     for result in result_list_json:
         class_color = COLORS[result['class_id'] % len(COLORS)]
         if 'mask' in result:
@@ -115,7 +112,7 @@ def view_result_default(result: Results, result_list_json, centers=None):
         
 
 
-        if result['class'] == "Healthy":
+        if result['class'] == "Healthy" and not printed:
             label_name = "Healthy"
             conf = result['confidence']*100
             st.success(f'✅ The Predicted Class is :  "{label_name}" {conf:.2f} % ')
@@ -123,8 +120,9 @@ def view_result_default(result: Results, result_list_json, centers=None):
             st.write("")
             st.image("./replant/healthy.png")
             st.markdown("***")
+            printed = True
         
-        if result['class'] == "Leaf_Spot":
+        if result['class'] == "Leaf_Spot" and not printed:
             label_name = "Leaf_Spot"
             conf = result['confidence']*100
             st.success(f'✅ The Predicted Class is :  "{label_name}" {conf:.2f} % ')
@@ -190,7 +188,7 @@ def view_result_default(result: Results, result_list_json, centers=None):
                 st_player("https://youtu.be/NcnHd4xSMvk")
 
              
-        if result['class'] == "Blight":
+        if result['class'] == "Blight" and not printed:
             label_name = "Blight"
             conf = result['confidence']*100
             st.success(f'✅ The Predicted Class is :  "{label_name}" {conf:.2f} % ')
@@ -259,10 +257,11 @@ def view_result_default(result: Results, result_list_json, centers=None):
             with ytb2:
             # Embed a music from SoundCloud
                 st_player("https://youtu.be/eTA8VFeE-6Q")
+            printed = True
 
     
         
-        if result['class'] == "Nitrogen_Deficiency":
+        if result['class'] == "Nitrogen_Deficiency" and not printed:
             label_name = "Nitrogen Deficiency Symptoms"
             conf = result['confidence']*100
             st.success(f'✅ The Predicted Class is :  "{label_name}" {conf:.2f} % ')
@@ -324,73 +323,75 @@ def view_result_default(result: Results, result_list_json, centers=None):
             with ytn2:
             # Embed a music from SoundCloud
                 st_player("https://youtu.be/vdSTlA_FtbY")   
+            printed = True
 
 
-        if result['class'] == "Powdery_Mildew":
-                label_name = "Powdery Mildew"
-                conf = result['confidence']*100
-                st.success(f'✅ The Predicted Class is :  "{label_name}" {conf:.2f} % ')
+        if result['class'] == "Powdery_Mildew" and not printed:
+            label_name = "Powdery Mildew"
+            conf = result['confidence']*100
+            st.success(f'✅ The Predicted Class is :  "{label_name}" {conf:.2f} % ')
 
-                recommend = "🌱 If a plant displays signs of a disease, remove all the infected parts and destroy them by burning.\n 🌱 Replace the soil in the flowerpot.\n 🌱 Use only settled room-temperature water forwatering.\n 🌱 Adjust the air conditions. If houseplants are infected,keep them spaced."
-                treatment = "- After harvesting the crop To destroy the plant debris that used to be diseased by tilling. And crop rotation. \n - Spraying fungicides such as triadimefon, myclobutanil. (myclobutanil) propiconazole (propiconazole) azocystrobin (azoxystrobin)"
-                st.image("./replant/Powdery1.png")
-                st.markdown("***")
+            recommend = "🌱 If a plant displays signs of a disease, remove all the infected parts and destroy them by burning.\n 🌱 Replace the soil in the flowerpot.\n 🌱 Use only settled room-temperature water forwatering.\n 🌱 Adjust the air conditions. If houseplants are infected,keep them spaced."
+            treatment = "- After harvesting the crop To destroy the plant debris that used to be diseased by tilling. And crop rotation. \n - Spraying fungicides such as triadimefon, myclobutanil. (myclobutanil) propiconazole (propiconazole) azocystrobin (azoxystrobin)"
+            st.image("./replant/Powdery1.png")
+            st.markdown("***")
 
-                st.image("./replant/PowderyPM.png")
-                st.image("./replant/PowderyI.png")
-                st.markdown("***")
+            st.image("./replant/PowderyPM.png")
+            st.image("./replant/PowderyI.png")
+            st.markdown("***")
 
-                st.image("./replant/PowderyHM.png")
-                st.markdown("***")
+            st.image("./replant/PowderyHM.png")
+            st.markdown("***")
 
-                st.image("./replant/ProductRecom1.png")
+            st.image("./replant/ProductRecom1.png")
 
 
-                col1, col2 = st.columns(2)
-                col3, col4 = st.columns(2)
+            col1, col2 = st.columns(2)
+            col3, col4 = st.columns(2)
 
-  
-                with col1:
-                       #st.write('Caption for second chart')
-                       hasClicked = card(
-            title="Powdery Prochloraz",
-            text="Midazole fungicide that is widely used in gardening and agriculture",
-            image="https://cdn.shopify.com/s/files/1/0722/2059/products/4copy_1800x1800.webp?v=1672229156",
-            url="https://www.bighaat.com/products/score-fungicide?variant=12725272936471&currency=INR&utm_medium=product_sync&utm_source=google&utm_content=sag_organic&utm_campaign=sag_organic&utm_source=Google&utm_medium=CPC&utm_campaign=17706716593&utm_adgroup=&utm_term=&creative=&device=c&devicemodel=&matchtype=&feeditemid=&targetid=&network=x&placement=&adposition=&GA_loc_interest_ms=&GA_loc_physical_ms=1007810&gclid=Cj0KCQiAofieBhDXARIsAHTTldpXkjTg0o32bEGopU2HNKUUZVseCAvqWfX6tgApx_MFEWtPNGi8cu4aAjLhEALw_wcB"
-        )      
-                    
-                with col2:
-                    hasClicked1 = card(
-            title="Patch Pro Fungicide",
-            text="Systemic fungicide that contains the active ingredient Propiconazole",
-            image="https://smhttp-ssl-60515.nexcesscdn.net/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/p/a/patch_pro_grn_shadow2_1.jpeg",
-            url="https://www.solutionsstores.com/patch-pro-fungicide"
-        )
-                with col3:
-                    hasClicked2 = card(
-            title="SAAF Fungicide",
-            text="Controls Anthracnose, Powdery mildew AND Rust Disease",
-            image="https://cdn.shopify.com/s/files/1/0722/2059/products/Untitleddesign_1_adec1180-1362-4f71-a633-1235b3b9e313_800x.jpg?v=1668517899",
-            url="https://www.bighaat.com/products/upl-saaf-fungicide?variant=31478554722327&currency=INR&utm_medium=product_sync&utm_source=google&utm_content=sag_organic&utm_campaign=sag_organic&utm_source=Google&utm_medium=CPC&utm_campaign=16667009224&utm_adgroup=&utm_term=&creative=&device=c&devicemodel=&matchtype=&feeditemid=&targetid=&network=x&placement=&adposition=&GA_loc_interest_ms=&GA_loc_physical_ms=1007810&gclid=Cj0KCQiA54KfBhCKARIsAJzSrdoz8vri-PqBXgXRx7JCt1TEZFVXPtt4PRoj_KxcRXxc4xCzhrKmc9saAuhFEALw_wcB"
-        )
-                with col4:
-                    hasClicked3 = card(
-            title="Leemark",
-            text="Prevent Powdery mildew, Black spot, Downy mildew, Blights & Molds",
-            image="https://badikheti-production.s3.ap-south-1.amazonaws.com/products/202301281242101383789267.jpg",
-            url="https://www.badikheti.com/organic-pesticide/pdp/leemark-prevent-powdery-mildew-black-spot-downy-mildew-blights-molds-and-other-plant-diseases/269unrka"
-        )
-                st.markdown("***")
-                st.image("./replant/Careguideyoutube.png")
 
-                youtubec1, youtubec2 = st.columns([1, 1])
-                with youtubec1:
-                # Embed a youtube video
-                    st_player("https://youtu.be/Kzm6jxeU1kg")
+            with col1:
+                   #st.write('Caption for second chart')
+                   hasClicked = card(
+        title="Powdery Prochloraz",
+        text="Midazole fungicide that is widely used in gardening and agriculture",
+        image="https://cdn.shopify.com/s/files/1/0722/2059/products/4copy_1800x1800.webp?v=1672229156",
+        url="https://www.bighaat.com/products/score-fungicide?variant=12725272936471&currency=INR&utm_medium=product_sync&utm_source=google&utm_content=sag_organic&utm_campaign=sag_organic&utm_source=Google&utm_medium=CPC&utm_campaign=17706716593&utm_adgroup=&utm_term=&creative=&device=c&devicemodel=&matchtype=&feeditemid=&targetid=&network=x&placement=&adposition=&GA_loc_interest_ms=&GA_loc_physical_ms=1007810&gclid=Cj0KCQiAofieBhDXARIsAHTTldpXkjTg0o32bEGopU2HNKUUZVseCAvqWfX6tgApx_MFEWtPNGi8cu4aAjLhEALw_wcB"
+    )      
 
-                with youtubec2:
-                # Embed a music from SoundCloud
-                    st_player("https://youtu.be/xEqiNh0upMk")   
+            with col2:
+                hasClicked1 = card(
+        title="Patch Pro Fungicide",
+        text="Systemic fungicide that contains the active ingredient Propiconazole",
+        image="https://smhttp-ssl-60515.nexcesscdn.net/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/p/a/patch_pro_grn_shadow2_1.jpeg",
+        url="https://www.solutionsstores.com/patch-pro-fungicide"
+    )
+            with col3:
+                hasClicked2 = card(
+        title="SAAF Fungicide",
+        text="Controls Anthracnose, Powdery mildew AND Rust Disease",
+        image="https://cdn.shopify.com/s/files/1/0722/2059/products/Untitleddesign_1_adec1180-1362-4f71-a633-1235b3b9e313_800x.jpg?v=1668517899",
+        url="https://www.bighaat.com/products/upl-saaf-fungicide?variant=31478554722327&currency=INR&utm_medium=product_sync&utm_source=google&utm_content=sag_organic&utm_campaign=sag_organic&utm_source=Google&utm_medium=CPC&utm_campaign=16667009224&utm_adgroup=&utm_term=&creative=&device=c&devicemodel=&matchtype=&feeditemid=&targetid=&network=x&placement=&adposition=&GA_loc_interest_ms=&GA_loc_physical_ms=1007810&gclid=Cj0KCQiA54KfBhCKARIsAJzSrdoz8vri-PqBXgXRx7JCt1TEZFVXPtt4PRoj_KxcRXxc4xCzhrKmc9saAuhFEALw_wcB"
+    )
+            with col4:
+                hasClicked3 = card(
+        title="Leemark",
+        text="Prevent Powdery mildew, Black spot, Downy mildew, Blights & Molds",
+        image="https://badikheti-production.s3.ap-south-1.amazonaws.com/products/202301281242101383789267.jpg",
+        url="https://www.badikheti.com/organic-pesticide/pdp/leemark-prevent-powdery-mildew-black-spot-downy-mildew-blights-molds-and-other-plant-diseases/269unrka"
+    )
+            st.markdown("***")
+            st.image("./replant/Careguideyoutube.png")
+
+            youtubec1, youtubec2 = st.columns([1, 1])
+            with youtubec1:
+            # Embed a youtube video
+                st_player("https://youtu.be/Kzm6jxeU1kg")
+
+            with youtubec2:
+            # Embed a music from SoundCloud
+                st_player("https://youtu.be/xEqiNh0upMk")  
+            printed = True
 
 
         if result['class'] == " ": # No disease found in the picture.
