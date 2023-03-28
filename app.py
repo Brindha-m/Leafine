@@ -100,7 +100,11 @@ def result_to_json(result: Results, tracker=None):
 def view_result_default(result: Results, result_list_json, centers=None):
     ALPHA = 0.5
     image = result.orig_img
-    printed = False
+    hprinted = False
+    bprinted = False
+    pprinted = False
+    lprinted = False
+    nprinted = False
     for result in result_list_json:
         class_color = COLORS[result['class_id'] % len(COLORS)]
         if 'mask' in result:
@@ -112,7 +116,7 @@ def view_result_default(result: Results, result_list_json, centers=None):
         
 
 
-        if result['class'] == "Healthy" and not printed:
+        if result['class'] == "Healthy" and not hprinted:
             label_name = "Healthy"
             conf = result['confidence']*100
             st.success(f'✅ The Predicted Class is :  "{label_name}" {conf:.2f} % ')
@@ -120,9 +124,9 @@ def view_result_default(result: Results, result_list_json, centers=None):
             st.write("")
             st.image("./replant/healthy.png")
             st.markdown("***")
-            printed = True
+            hprinted = True
         
-        if result['class'] == "Leaf_Spot" and not printed:
+        if result['class'] == "Leaf_Spot" and not lprinted:
             label_name = "Leaf_Spot"
             conf = result['confidence']*100
             st.success(f'✅ The Predicted Class is :  "{label_name}" {conf:.2f} % ')
@@ -186,9 +190,10 @@ def view_result_default(result: Results, result_list_json, centers=None):
             with yt2:
             # Embed a music from SoundCloud
                 st_player("https://youtu.be/NcnHd4xSMvk")
+            lprinted = True
 
              
-        if result['class'] == "Blight" and not printed:
+        if result['class'] == "Blight" and not bprinted:
             label_name = "Blight"
             conf = result['confidence']*100
             st.success(f'✅ The Predicted Class is :  "{label_name}" {conf:.2f} % ')
@@ -257,11 +262,11 @@ def view_result_default(result: Results, result_list_json, centers=None):
             with ytb2:
             # Embed a music from SoundCloud
                 st_player("https://youtu.be/eTA8VFeE-6Q")
-            printed = True
+            bprinted = True
 
     
         
-        if result['class'] == "Nitrogen_Deficiency" and not printed:
+        if result['class'] == "Nitrogen_Deficiency" and not nprinted:
             label_name = "Nitrogen Deficiency Symptoms"
             conf = result['confidence']*100
             st.success(f'✅ The Predicted Class is :  "{label_name}" {conf:.2f} % ')
@@ -323,10 +328,10 @@ def view_result_default(result: Results, result_list_json, centers=None):
             with ytn2:
             # Embed a music from SoundCloud
                 st_player("https://youtu.be/vdSTlA_FtbY")   
-            printed = True
+            nprinted = True
 
 
-        if result['class'] == "Powdery_Mildew" and not printed:
+        if result['class'] == "Powdery_Mildew" and not pprinted:
             label_name = "Powdery Mildew"
             conf = result['confidence']*100
             st.success(f'✅ The Predicted Class is :  "{label_name}" {conf:.2f} % ')
@@ -391,7 +396,7 @@ def view_result_default(result: Results, result_list_json, centers=None):
             with youtubec2:
             # Embed a music from SoundCloud
                 st_player("https://youtu.be/xEqiNh0upMk")  
-            printed = True
+            pprinted = True
 
 
         if result['class'] == " ": # No disease found in the picture.
