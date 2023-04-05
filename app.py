@@ -578,7 +578,7 @@ def main():
         output_image = my_path + "/images/gradcam2.png"
         st.image("./replant/logoleafine.png")
         # Perceive the leaf ailment and sort out some way to treat them
-        st.caption('### GradCam Visualization and Detection with ResNet Detector ###')
+        st.caption('### GradCam Visualization and Detection with ResNeXt Detector ###')
         
         st.markdown("***")
 
