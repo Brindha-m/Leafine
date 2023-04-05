@@ -375,7 +375,7 @@ def view_result_default(result: Results, result_list_json, centers=None):
                 hasClicked2 = card(
         title="SAAF Fungicide",
         text="Controls Anthracnose, Powdery mildew AND Rust Disease",
-        image="https://cdn.shopify.com/s/files/1/0722/2059/products/Untitleddesign_1_adec1180-1362-4f71-a633-1235b3b9e313_800x.jpg?v=1668517899",
+        image="https://cdn.shopify.com/s/files/1/0722/2059/products/Saaf_1800x1800.webp?v=1680086906",
         url="https://www.bighaat.com/products/upl-saaf-fungicide?variant=31478554722327&currency=INR&utm_medium=product_sync&utm_source=google&utm_content=sag_organic&utm_campaign=sag_organic&utm_source=Google&utm_medium=CPC&utm_campaign=16667009224&utm_adgroup=&utm_term=&creative=&device=c&devicemodel=&matchtype=&feeditemid=&targetid=&network=x&placement=&adposition=&GA_loc_interest_ms=&GA_loc_physical_ms=1007810&gclid=Cj0KCQiA54KfBhCKARIsAJzSrdoz8vri-PqBXgXRx7JCt1TEZFVXPtt4PRoj_KxcRXxc4xCzhrKmc9saAuhFEALw_wcB"
     )
             with col4:
