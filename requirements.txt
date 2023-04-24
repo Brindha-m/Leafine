@@ -1,4 +1,5 @@
 ultralytics
+#ultralytics for yolov8
 notebook
 numpy
 opencv-python-headless
