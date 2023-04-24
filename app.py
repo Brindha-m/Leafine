@@ -757,7 +757,7 @@ def main():
             deploy(uploaded_image, uploaded=True, demo=False)
             del uploaded_image
 
-
+#start
 if __name__ == '__main__':
     main()
 
