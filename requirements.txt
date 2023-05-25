@@ -83,7 +83,7 @@ toml==0.10.2
 toolz==0.12.0
 torch==2.0.0
 torchvision==0.15.1
-tornado==6.2
+tornado
 tqdm==4.65.0
 triton==2.0.0
 typing-extensions==4.5.0
