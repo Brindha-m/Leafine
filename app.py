@@ -476,15 +476,15 @@ def imageInput(device):
         #st.write(detect_val)
 
         annotated_text(("YOLOv8","detections","#2E7C30"))
-        out2 = st.columns(1)
+        out1, out2 = st.columns(2)
        
          # --Display predicton / print result
-        # with out1: 
+        with out1: 
             
-        #     img_out = Image.open(outputpath)
-        #     annotated_text(("YOLOv5","detections","#1F617C"))
-        #     st.write("")
-        #     st.image(img_out)
+            # img_out = Image.open(outputpath)
+            annotated_text(("YOLOv5","detections","#1F617C"))
+            st.write("")
+            # st.image(img_out)
         
         st.markdown("***")
         #get_accuracy_str(detect_val) # get detection string result
