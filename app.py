@@ -504,7 +504,6 @@ def imageInput(device):
             img, result_list_json = image_processing(img, model1)
               # out2 = st.columns(1)
             with out1:
-              st.image(img, channels="BGR")
               with st.spinner("Detecting with 💕"):
                   # print(json.dumps(result_list_json, indent=2))
                   st.write(" ")
