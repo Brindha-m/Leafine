@@ -18,6 +18,11 @@ import seaborn as sns
 import plotly.express as px
 import cv2
 
+import sys
+sys.path.append('./ultralytics/yolo')
+
+from utils.checks import check_requirements
+
 #### Yolov8 imports ####
 from utilsv8 import get_detection_folderv8, check_folders
 import redirect as rd
@@ -455,7 +460,7 @@ def imageInput(device):
         # call Model prediction--
        
         #  model = torch.hub.load('ultralytics/yolov5', 'custom' , path ='models/yleafinev5.pt', force_reload = True, _verbose = False)
-        model = torch.hub.load('', 'custom', path = 'models/yleafinev5.pt', force_reload = True, _verbose = False)
+        model = torch.hub.load('ultralytics/yolov5', 'custom', path = 'models/yleafinev5.pt', force_reload = True, _verbose = False)
         _ = model.cuda() if device == 'cuda' else model.cpu() # hide cuda_cnn display source : https://stackoverflow.com/questions/41149781/how-to-prevent-f-write-to-output-the-number-of-characters-written
         pred = model(imgpath)
         st.write(pred)
