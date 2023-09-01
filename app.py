@@ -21,8 +21,6 @@ import cv2
 import sys
 sys.path.append('./ultralytics/yolo')
 
-from utils.checks import check_requirements
-
 #### Yolov8 imports ####
 from utilsv8 import get_detection_folderv8, check_folders
 import redirect as rd
