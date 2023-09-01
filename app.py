@@ -503,13 +503,13 @@ def imageInput(device):
             ## for detection with bb
             print(f"Used Custom reframed YOLOv8 model: {model1}")
             img, result_list_json = image_processing(img, model1)
-            out2 = st.columns(1)
-            with out2:
-                annotated_text(("YOLOv8","detections","#2E7C30"))
-                with st.spinner("Detecting with 💕"):
-                    # print(json.dumps(result_list_json, indent=2))
-                    st.write(" ")
-                    st.image(img, channels="BGR")
+            # out2 = st.columns(1)
+            # with out2:
+            annotated_text(("YOLOv8","detections","#2E7C30"))
+            with st.spinner("Detecting with 💕"):
+                # print(json.dumps(result_list_json, indent=2))
+                st.write(" ")
+                st.image(img, channels="BGR")
                     
             
             
