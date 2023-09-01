@@ -476,8 +476,8 @@ def imageInput(device):
         #st.write(detect_val)
 
         annotated_text(("YOLOv8","detections","#2E7C30"))
-        out2
-        # out2 = st.columns(1)
+        # out2
+        out2 = st.columns(1)
          # --Display predicton / print result
         # with out1: 
             
@@ -504,11 +504,12 @@ def imageInput(device):
             print(f"Used Custom reframed YOLOv8 model: {model1}")
             img, result_list_json = image_processing(img, model1)
             # out2 = st.columns(1)
-            
-            with out2 && st.spinner("Detecting with 💕"):
-                # print(json.dumps(result_list_json, indent=2))
-                st.write(" ")
-                st.image(img, channels="BGR")
+            with out2:
+              st.image(img, channels="BGR")
+              with st.spinner("Detecting with 💕"):
+                  # print(json.dumps(result_list_json, indent=2))
+                  st.write(" ")
+                  st.image(img, channels="BGR")
                       
             
             
