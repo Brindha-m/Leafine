@@ -475,8 +475,8 @@ def imageInput(device):
         #to know the detection results
         #st.write(detect_val)
 
-        
-        out2 = st.columns(1)
+        annotated_text(("YOLOv8","detections","#2E7C30"))
+        out2
         # out2 = st.columns(1)
          # --Display predicton / print result
         # with out1: 
@@ -493,9 +493,9 @@ def imageInput(device):
         check_folders()
         
         # YOLOV8 DETECTION RESULTS
-        
-        #with st.spinner("Detecting with 💕"):
+
         model1 = YOLO(f'models/v8.pt')
+        #with st.spinner("Detecting with 💕"):
         if image_file is not None:
             st.write("")
             st.sidebar.success("Successfully uploaded")
@@ -504,12 +504,11 @@ def imageInput(device):
             print(f"Used Custom reframed YOLOv8 model: {model1}")
             img, result_list_json = image_processing(img, model1)
             # out2 = st.columns(1)
-            with out2:
-              annotated_text(("YOLOv8","detections","#2E7C30"))
-              with st.spinner("Detecting with 💕"):
-                  # print(json.dumps(result_list_json, indent=2))
-                  st.write(" ")
-                  st.image(img, channels="BGR")
+            
+            with out2 && st.spinner("Detecting with 💕"):
+                # print(json.dumps(result_list_json, indent=2))
+                st.write(" ")
+                st.image(img, channels="BGR")
                       
             
             
