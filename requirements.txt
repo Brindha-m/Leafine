@@ -21,7 +21,7 @@ entrypoints==0.4
 filelock==3.10.0
 fonttools==4.39.2
 gitdb==4.0.10
-GitPython==3.1.31
+GitPython
 idna==3.4
 importlib-metadata==6.0.0
 importlib-resources==5.12.0
