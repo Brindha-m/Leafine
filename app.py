@@ -562,9 +562,9 @@ def main():
         # if page == "Upload own data":
         st.subheader('🔽Upload Image 📸')
         t1 = time.perf_counter()
-        #deviceoption = st.radio("Select runtime mode :", ['cpu', 'cuda (GPU)'], index=0)
+        deviceoption = st.radio("Select runtime mode :", ['cpu', 'cuda (GPU)'], index=0)
         # deviceoption = 'cpu'
-        imageInput()
+        imageInput(deviceoption)
         t2 = time.perf_counter()
         st.success('Time taken to run: {:.2f} sec'.format(t2-t1))
 
