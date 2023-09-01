@@ -458,30 +458,33 @@ def imageInput(device):
         # call Model prediction--
        
         #  model = torch.hub.load('ultralytics/yolov5', 'custom' , path ='models/yleafinev5.pt', force_reload = True, _verbose = False)
-        model = torch.hub.load('ultralytics/yolov5', 'custom', path = 'models/yleafinev5.pt', force_reload = True, _verbose = False)
-        _ = model.cuda() if device == 'cuda' else model.cpu() # hide cuda_cnn display source : https://stackoverflow.com/questions/41149781/how-to-prevent-f-write-to-output-the-number-of-characters-written
-        pred = model(imgpath)
-        st.write(pred)
-        pred.render()  # render bbox in image
-        for im in pred.ims:
-            im_base64 = Image.fromarray(im)
-            im_base64.save(outputpath)
+        
+        # model = torch.hub.load('ultralytics/yolov5', 'custom', path = 'models/yleafinev5.pt', force_reload = True, _verbose = False)
+        # _ = model.cuda() if device == 'cuda' else model.cpu() # hide cuda_cnn display source : https://stackoverflow.com/questions/41149781/how-to-prevent-f-write-to-output-the-number-of-characters-written
+        # pred = model(imgpath)
+        # st.write(pred)
+        # pred.render()  # render bbox in image
+        # for im in pred.ims:
+        #     im_base64 = Image.fromarray(im)
+        #     im_base64.save(outputpath)
 
-        pred.save()
-        detect_val = (pred.pandas().xyxy[0]).values.tolist()
+        # pred.save()
+        # detect_val = (pred.pandas().xyxy[0]).values.tolist()
 
+      
         #to know the detection results
         #st.write(detect_val)
 
         
-        out1, out2 = st.columns(2)
+        # out1, out2 = st.columns(2)
+        out2 = st.columns(1)
          # --Display predicton / print result
-        with out1: 
+        # with out1: 
             
-            img_out = Image.open(outputpath)
-            annotated_text(("YOLOv5","detections","#1F617C"))
-            st.write("")
-            st.image(img_out)
+        #     img_out = Image.open(outputpath)
+        #     annotated_text(("YOLOv5","detections","#1F617C"))
+        #     st.write("")
+        #     st.image(img_out)
         
         st.markdown("***")
         #get_accuracy_str(detect_val) # get detection string result
