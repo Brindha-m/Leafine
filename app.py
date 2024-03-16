@@ -4,7 +4,6 @@ import os
 import time
 from datetime import datetime
 import utilsv8
-# from matplotlib import pyplot as plt
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -81,8 +80,7 @@ def result_to_json(result: Results, tracker=None):
                 'y_max': int(result.boxes.xyxy[idx][3]),
                 # 'x_min': int(result.boxes.boxes[idx][0]),
                 # 'y_min': int(result.boxes.boxes[idx][1]),
-                # 'x_max': int(result.boxes.boxes[idx][2]),
-                # 'y_max': int(result.boxes.boxes[idx][3]),
+                
             },
         } for idx in range(len_results)
     ]
