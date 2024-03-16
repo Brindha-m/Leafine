@@ -27,7 +27,9 @@ from utilsv8 import get_detection_folderv8, check_folders
 import redirect as rd
 # from ultralytics.yolo.engine.model import YOLO
 from ultralytics import YOLO
-from ultralytics.yolo.engine.results import Results
+from ultralytics.engine.results import Results
+
+# from ultralytics.yolo.engine.results import Results
 
 import streamlit as st
 from PIL import Image
