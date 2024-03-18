@@ -1,5 +1,6 @@
 ultralytics
 #ultralytics for yolov8
+streamlit
 notebook
 numpy
 pyproject-toml
@@ -77,7 +78,6 @@ sentry-sdk==1.17.0
 six==1.16.0
 smmap==5.0.0
 streamlit-nightly
-streamlit
 st-annotated-text
 streamlit-card
 streamlit-player
