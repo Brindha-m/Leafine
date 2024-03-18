@@ -1,12 +1,13 @@
 ultralytics
 #ultralytics for yolov8
 notebook
+matplotlib
 numpy
 pyproject-toml
 opencv-python-headless
 opencv-python
-matplotlib
 ipython
+
 albumentations
 altair
 attrs
