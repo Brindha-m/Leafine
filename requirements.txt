@@ -85,8 +85,8 @@ thop
 toml
 tqdm
 toolz
-torch
 torchvision
+torch
 tornado
 tqdm
 triton
