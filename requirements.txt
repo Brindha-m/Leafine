@@ -87,6 +87,7 @@ tqdm
 toolz
 torchvision
 torch
+torch-utils
 tornado
 tqdm
 triton
