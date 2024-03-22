@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import streamlit as st
-# import torch
+import torch
 from annotated_text import annotated_text
 from PIL import Image
 from streamlit_card import card
