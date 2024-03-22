@@ -2,6 +2,8 @@ import gc
 import glob
 import os
 import time
+import sys
+sys.path.append('./ultralytics/yolov8')
 from datetime import datetime
 import utilsv8
 import matplotlib.pyplot as plt
@@ -18,8 +20,8 @@ import seaborn as sns
 import plotly.express as px
 import cv2
 
-import sys
-sys.path.append('./ultralytics/yolo')
+
+
 
 #### Yolov8 imports ####
 from utilsv8 import get_detection_folderv8, check_folders
