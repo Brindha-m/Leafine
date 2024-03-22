@@ -7,9 +7,9 @@ pyproject-toml
 opencv-python-headless
 opencv-python
 ipython
-torch
+torch==1.0.0
+torchvision==0.2.2.post3
 torchutils
-torchvision
 
 albumentations
 altair
