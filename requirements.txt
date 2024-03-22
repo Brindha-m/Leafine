@@ -7,7 +7,10 @@ pyproject-toml
 opencv-python-headless
 opencv-python
 ipython
+torch
 torchutils
+python==3.11
+torchvision
 
 albumentations
 altair
@@ -86,9 +89,6 @@ thop
 toml
 tqdm
 toolz
-torchvision
-torch
-torch-utils
 tornado
 tqdm
 triton
@@ -124,8 +124,4 @@ pandas
 seaborn
 matplotlib
 
-
-setuptools ; python_version >= "3.12"
-packaging
-optree>=0.9.1
-lark
+scikit-learn == 1.3.1
