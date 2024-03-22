@@ -9,7 +9,7 @@ opencv-python
 ipython
 torch==2.2.1
 
-torchvision==0.2.2.post3
+torchvision
 torchutils
 
 albumentations
