@@ -9,7 +9,6 @@ opencv-python
 ipython
 torch
 torchutils
-python
 torchvision
 
 albumentations
