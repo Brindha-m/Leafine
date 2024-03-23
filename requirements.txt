@@ -12,7 +12,7 @@ torch==2.1.2
 
 pkgconfig
 
-nvidia-nccl
+
 torchvision
 torchutils
 
