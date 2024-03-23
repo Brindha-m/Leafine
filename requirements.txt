@@ -7,8 +7,12 @@ pyproject-toml
 opencv-python-headless
 opencv-python
 ipython
-torch==2.2.1
+torch==2.1.2
 
+
+pkgconfig
+
+nvidia-nccl
 torchvision
 torchutils
 
