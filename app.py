@@ -488,7 +488,7 @@ def imageInput(device):
        
          # --Display predicton / print result
         with out2: 
-            # img_out = Image.open(outputpath)
+            img_out = Image.open(outputpath)
             annotated_text(("YOLOv5","detections","#1F617C"))
             st.image(img_out)
         
