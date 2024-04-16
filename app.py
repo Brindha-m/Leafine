@@ -469,7 +469,7 @@ def imageInput(device):
         model = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yleafinev5.pt', force_reload=True)
         _ = model.cuda() if device == 'cuda' else model.cpu() # hide cuda_cnn display source : https://stackoverflow.com/questions/41149781/how-to-prevent-f-write-to-output-the-number-of-characters-written
         pred = model(imgpath)
-        st.write(pred)
+        #st.write(pred)
         pred.render()  # render bbox in image
         for im in pred.ims:
             im_base64 = Image.fromarray(im)
@@ -490,8 +490,7 @@ def imageInput(device):
         with out2: 
             # img_out = Image.open(outputpath)
             annotated_text(("YOLOv5","detections","#1F617C"))
-            st.write("")
-            # st.image(img_out)
+            st.image(img_out)
         
         st.markdown("***")
         #get_accuracy_str(detect_val) # get detection string result
