@@ -490,6 +490,7 @@ def imageInput(device):
         with out2: 
             img_out = Image.open(outputpath)
             annotated_text(("YOLOv5","detections","#1F617C"))
+            st.write("")
             st.image(img_out)
         
         st.markdown("***")
