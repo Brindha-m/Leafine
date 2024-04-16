@@ -465,8 +465,8 @@ def imageInput(device):
         # call Model prediction--
        
         #  model = torch.hub.load('ultralytics/yolov5', 'custom' , path ='models/yleafinev5.pt', force_reload = True, _verbose = False)
-        
-        model = torch.hub.load('ultralytics/yolov5', 'custom', path = 'models/yleafinev5.pt', force_reload = True, _verbose = False)
+
+        model = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yleafinev5.pt', force_reload=True)
         _ = model.cuda() if device == 'cuda' else model.cpu() # hide cuda_cnn display source : https://stackoverflow.com/questions/41149781/how-to-prevent-f-write-to-output-the-number-of-characters-written
         pred = model(imgpath)
         st.write(pred)
@@ -476,6 +476,7 @@ def imageInput(device):
             im_base64.save(outputpath)
 
         pred.save()
+        
         detect_val = (pred.pandas().xyxy[0]).values.tolist()
 
       
