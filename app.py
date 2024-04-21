@@ -466,18 +466,18 @@ def imageInput(device):
        
         #  model = torch.hub.load('ultralytics/yolov5', 'custom' , path ='models/yleafinev5.pt', force_reload = True, _verbose = False)
 
-        model = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yleafinev5.pt', force_reload=True)
-        _ = model.cuda() if device == 'cuda' else model.cpu() # hide cuda_cnn display source : https://stackoverflow.com/questions/41149781/how-to-prevent-f-write-to-output-the-number-of-characters-written
-        pred = model(imgpath)
-        #st.write(pred)
-        pred.render()  # render bbox in image
-        for im in pred.ims:
-            im_base64 = Image.fromarray(im)
-            im_base64.save(outputpath)
+        # model = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yleafinev5.pt', force_reload=True)
+        # _ = model.cuda() if device == 'cuda' else model.cpu() # hide cuda_cnn display source : https://stackoverflow.com/questions/41149781/how-to-prevent-f-write-to-output-the-number-of-characters-written
+        # pred = model(imgpath)
+        # #st.write(pred)
+        # pred.render()  # render bbox in image
+        # for im in pred.ims:
+        #     im_base64 = Image.fromarray(im)
+        #     im_base64.save(outputpath)
 
-        pred.save()
+        # pred.save()
         
-        detect_val = (pred.pandas().xyxy[0]).values.tolist()
+        # detect_val = (pred.pandas().xyxy[0]).values.tolist()
 
       
         #to know the detection results
