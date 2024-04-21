@@ -508,7 +508,7 @@ def imageInput(device):
             st.sidebar.success("Successfully uploaded")
             img = cv2.imdecode(np.frombuffer(image_file.read(), np.uint8), 1)
             ## for detection with bb
-            print(f"Used Custom reframed YOLOv8 model: {model1}")
+            #print(f"Used Custom reframed YOLOv8 model: {model1}")
             img, result_list_json = image_processing(img, model1)
               # out2 = st.columns(1)
             with out1:
