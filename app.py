@@ -500,8 +500,17 @@ def imageInput(device):
         check_folders()
         
         # YOLOV8 DETECTION RESULTS
-        
-        model1 = YOLO(f'models/v8.pt')
+        @st.cache_resource
+        def load_model():
+            # Load and return the YOLO model
+            return YOLO(f'models/v8.pt')
+          
+      
+        # Load models
+        model1 = load_model()
+
+
+        # model1 = YOLO(f'models/v8.pt')
         #with st.spinner("Detecting with 💕"):
         if image_file is not None:
             st.write("")
