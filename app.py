@@ -592,7 +592,7 @@ def main():
         gc.enable()
 
         # Hide warnings
-        st.set_option("deprecation.showfileUploaderEncoding", False)
+        # st.set_option("deprecation.showfileUploaderEncoding", False)
 
         # Set the directory path
         my_path = "."
